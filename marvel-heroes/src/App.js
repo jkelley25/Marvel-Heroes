@@ -1,24 +1,25 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import HeroList from './components/HeroList';
+import HeroPage from './components/HeroPage';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="nav-bar">
+        <h1 className="title">Marvel Heroes</h1>
+      </div>
+      <div></div>
+      <div className="components">
+      <BrowserRouter>
+      <Switch>
+        <Route path='/' exact component={ HeroList }/>
+        <Route path='/hero/:id' exact component={ HeroPage } />
+        <Route path='/' render={() => <div>404</div>} />
+      </Switch>
+      </BrowserRouter>
+      </div>
     </div>
   );
 }

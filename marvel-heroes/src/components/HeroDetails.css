@@ -1,0 +1,35 @@
+.hero-details {
+    display: flex;
+    position: relative;
+    margin: 20px 40px 0 40px;
+    border: 1px solid black ;
+    border-radius: 20px;
+    padding: 10px 10px 10px 10px;
+    height: 250px;
+}
+/* .hero-details:hover {
+    background-color: rgba(255, 0, 0, 0.589);
+} */
+
+.thumb-nail {
+    display: inline-block;
+    flex-shrink: unset;
+    border-radius: 20px;
+    width: 200px;
+}
+
+.thumb-nail:hover {
+    transform: translateY(-5px);
+    transition-duration: 0.5s;
+}
+
+h2 {
+    margin-left: 20px;
+}
+
+.description {
+    width: 400px;
+    position: absolute;
+    transform: translate(220px, 40px);
+    padding-right: 40px;
+}

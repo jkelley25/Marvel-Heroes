@@ -1,0 +1,43 @@
+.main-container {
+    display: flex;
+}
+
+.content-container {
+    position: relative;
+    left: 15vw;
+}
+
+.featured-content {
+    position: relative;
+    left: 20vw;
+    margin-bottom: 30px;
+}
+
+.hero-summary {
+    position: relative;
+    left: 20vw;
+    display: flex;
+    /* flex-wrap: wrap; */
+    margin-bottom: 25vh;
+    width: 60vw;
+    padding-bottom: 70px;
+    border-bottom: 1px solid black;
+}
+.hero-child-1 {
+    margin-right: 30px;
+}
+.hero-name {
+    text-align: center;
+}
+.hero-img {
+    height: 25vh;
+    width: auto;
+    border-radius: 50%;
+    border: 1px solid black;
+}
+
+.main-child-1 {
+    border: 1px solid black;
+    width: 60vw;
+}
+
