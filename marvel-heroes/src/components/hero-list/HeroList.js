@@ -1,6 +1,6 @@
 import React from 'react';
 import md5 from 'js-md5';
-import HeroDetails from './HeroDetails';
+import HeroDetails from '../hero-details/HeroDetails';
 
 
 class HeroList extends React.Component {

@@ -1,8 +1,8 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import HeroList from './components/HeroList';
-import HeroPage from './components/HeroPage';
+import HeroList from './components/hero-list/HeroList';
+import HeroPage from './components/hero-page/HeroPage';
 
 function App() {
   return (
@@ -11,7 +11,6 @@ function App() {
         <h1 className="title">Marvel Heroes</h1>
       </div>
       <div></div>
-      <div className="components">
       <BrowserRouter>
       <Switch>
         <Route path='/' exact component={ HeroList }/>
@@ -19,7 +18,6 @@ function App() {
         <Route path='/' render={() => <div>404</div>} />
       </Switch>
       </BrowserRouter>
-      </div>
     </div>
   );
 }
