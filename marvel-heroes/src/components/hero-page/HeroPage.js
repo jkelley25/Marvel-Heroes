@@ -3,6 +3,7 @@ import md5 from 'js-md5';
 import './HeroPage.css';
 import ComicList from '../comic-list/ComicList';
 import DetailsCard from '../details-card/DetailsCard';
+import SeriesList from '../series-list/SeriesList';
 class HeroPage extends React.Component {
   constructor(props) {
     super(props);
@@ -19,10 +20,10 @@ class HeroPage extends React.Component {
 
   // Function to handle opening of details card, passed as prop to 
   // ComicList component 
-  handleOpenCard(comic) {
+  handleOpenCard(contentData) {
     this.setState({
       viewCard: true,
-      content: comic,
+      content: contentData,
     })
   }
 
@@ -66,10 +67,12 @@ class HeroPage extends React.Component {
                         <ComicList comicsArray={comicsData} viewComic={this.handleOpenCard}/>
                       </div>
                       <h3 className="featured-content"> Featured Series </h3>
+                      <div className="content-container"> 
+                        <SeriesList seriesArray={seriesData} viewSeries={this.handleOpenCard} />
+                      </div>
                   </div>
                   <div className="main-child-2"> 
                       { detailsCard }
-                      
                   </div>
                   </div>
     }

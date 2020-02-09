@@ -5,7 +5,7 @@ import './ComicList.css';
 class ComicList extends React.Component {
   constructor(props) {
     super(props);
-    this.viewSide = this.viewSide.bind(this);
+    this.viewComic = this.viewComic.bind(this);
     this.state = {
         viewSide: false,
         isLoaded: false,
@@ -15,7 +15,7 @@ class ComicList extends React.Component {
 
   // Function to trigger the handleOpenCard on HeroPage component
   // and passes the comic data  
-  viewSide(comic) {
+  viewComic(comic) {
     this.props.viewComic(comic);
   }
   
@@ -23,7 +23,7 @@ class ComicList extends React.Component {
     const comics = this.props.comicsArray;
     return <div className="comics-list">
         {comics.map((comic, index) => <ComicDetails 
-        comicDetails={comic} viewComic={this.viewSide} key={index}/>)}
+        comicDetails={comic} viewComic={this.viewComic} key={index}/>)}
     </div>
   } 
 }

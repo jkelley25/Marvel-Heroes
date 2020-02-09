@@ -2,19 +2,10 @@
     display: flex;
     flex-direction: column;
     width: 200px;
-    padding: 0 20px 0 0;
+    margin: 0 40px 0 40px;
 }
 
 
-@media only screen and (max-width: 600px) {
-    /* For mobile phones: */
-    .cover-img {
-    } 
-    .comic {
-        padding: 0;
-        margin: 0;
-    }
-}
 
 .cover-img:hover {
     transform: translateY(-10px);

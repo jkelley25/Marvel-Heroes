@@ -26,12 +26,9 @@
 
 .content {
     display: flex;
-    left: 20vw;
-    transform: translateY(5vh);
     justify-content: space-evenly;
     flex-wrap: wrap;
     margin: 0 20px 0 20px;
-
 }
 
 .info {
@@ -50,7 +47,7 @@
 
 .content img {
     width: auto;
-    height: 50vh;
+    height: 60vh;
     -webkit-box-shadow: 11px 11px 5px 0px rgba(0,0,0,0.25);
     -moz-box-shadow: 11px 11px 5px 0px rgba(0,0,0,0.25);
     box-shadow: 11px 11px 5px 0px rgba(0,0,0,0.25);

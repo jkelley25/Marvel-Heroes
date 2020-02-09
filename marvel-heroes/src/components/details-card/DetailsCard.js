@@ -19,7 +19,12 @@ class DetailsCard extends React.Component {
 
   render() {
       const content = this.props.contentData;
-      var d = new Date(content.dates[0].date);
+      var d;
+      if(content.dates !== undefined) {
+        d = new Date(content.dates[0].date).getFullYear();
+      } else {
+        d = 'Not available'
+      }
       if(this.state.open) {
         return <div className="overlay-div">
             <IosClose className="close" onClick={() => { this.handleClose(); this.props.close() }} fontSize="60px" color="red" />
@@ -29,7 +34,7 @@ class DetailsCard extends React.Component {
                   <h3>{content.title}</h3>
                   <h3> Format: {content.format}</h3>
                   <h3> Issue number: {content.issueNumber}</h3>
-                  <h3> Publised: { `${d.getFullYear()}` }</h3>
+                  <h3> Publised: { `${d}` }</h3>
                   <h3> Synopsis </h3>
                   <p> { content.description } </p>
                 </div>
