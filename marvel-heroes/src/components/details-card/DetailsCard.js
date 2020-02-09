@@ -19,15 +19,20 @@ class DetailsCard extends React.Component {
 
   render() {
       const content = this.props.contentData;
+      var d = new Date(content.dates[0].date);
       if(this.state.open) {
         return <div className="overlay-div">
             <IosClose className="close" onClick={() => { this.handleClose(); this.props.close() }} fontSize="60px" color="red" />
             <div className="content">
-                    <img src={`${content.thumbnail.path}.${content.thumbnail.extension}`} alt="Cover"/>
-                    <h2> { content.title } </h2>
-                <h3> Format: {content.format}</h3>
-                <h3> Issue number: {content.issueNumber}</h3>
-                <p> { content.description } </p>
+                <img src={`${content.thumbnail.path}.${content.thumbnail.extension}`} alt="Cover"/>
+                <div className="info">
+                  <h3>{content.title}</h3>
+                  <h3> Format: {content.format}</h3>
+                  <h3> Issue number: {content.issueNumber}</h3>
+                  <h3> Publised: { `${d.getFullYear()}` }</h3>
+                  <h3> Synopsis </h3>
+                  <p> { content.description } </p>
+                </div>
             </div>
          </div>;
       } else {

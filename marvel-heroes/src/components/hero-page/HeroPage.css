@@ -1,5 +1,6 @@
 .main-container {
     display: flex;
+    flex-wrap: wrap;
 }
 
 .content-container {
@@ -17,7 +18,7 @@
     position: relative;
     left: 20vw;
     display: flex;
-    /* flex-wrap: wrap; */
+    flex-wrap: wrap;
     margin-bottom: 25vh;
     width: 60vw;
     padding-bottom: 70px;
@@ -37,7 +38,16 @@
 }
 
 .main-child-1 {
-    border: 1px solid black;
     width: 60vw;
 }
+
+.main-child-2 {
+    position: absolute;
+    width: 90vw;
+    left: 5vw;
+    overflow: hidden;
+
+}
+
+
 

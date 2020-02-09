@@ -1,32 +1,57 @@
-.overlay-div *{
+.overlay-div * {
     color: honeydew;
 }
 
-.overlay-div{
-    width: 40vw;
-    border: 1px solid black;
-    background-color: rgba(95, 81, 81, 0.945);
+.overlay-div {
+    width: 90vw;
+    border-radius: 25px;
+    background-color: rgba(46, 46, 46, 0.986);
     height: 80vh;
     position: fixed;
     top: 10vh;
     overflow-y: scroll;
+    -webkit-box-shadow: 7px 9px 173px 152px rgba(0, 0, 0, 0.41);
+    -moz-box-shadow: 7px 9px 173px 152px rgba(0, 0, 0, 0.41);
+    box-shadow: 7px 9px 173px 152px rgba(0, 0, 0, 0.41);
+}
+
+::-webkit-scrollbar {
+    width: 0px;  /* Remove scrollbar space */
+    background: transparent;  /* Optional: just make scrollbar invisible */
 }
 
 .close {
     position: sticky;
 }
 
+.content {
+    display: flex;
+    left: 20vw;
+    transform: translateY(5vh);
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    margin: 0 20px 0 20px;
+
+}
+
+.info {
+    width: 30vw;
+    padding: 0;
+    margin: 0;
+}
+
+
+@media only screen and (max-width: 600px) {
+    /* For mobile phones: */
+    .info {
+        width: 80vw;
+    }
+}
 
 .content img {
-    position: relative;
-    width: 400px;
-    height: 500px;
-    left: 15%;
-}
-
-.content h2 {
-    text-align: center;
-}
-.content p {
-    margin: 0 10px 0 10px;
+    width: auto;
+    height: 50vh;
+    -webkit-box-shadow: 11px 11px 5px 0px rgba(0,0,0,0.25);
+    -moz-box-shadow: 11px 11px 5px 0px rgba(0,0,0,0.25);
+    box-shadow: 11px 11px 5px 0px rgba(0,0,0,0.25);
 }

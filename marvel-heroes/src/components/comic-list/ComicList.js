@@ -13,10 +13,12 @@ class ComicList extends React.Component {
     };
   }
 
+  // Function to trigger the handleOpenCard on HeroPage component
+  // and passes the comic data  
   viewSide(comic) {
     this.props.viewComic(comic);
   }
-
+  
   render() {
     const comics = this.props.comicsArray;
     return <div className="comics-list">

@@ -66,11 +66,12 @@ class HeroPage extends React.Component {
                         <ComicList comicsArray={comicsData} viewComic={this.handleOpenCard}/>
                       </div>
                       <h3 className="featured-content"> Featured Series </h3>
-                    </div>
-                    <div className="main-child-2"> 
+                  </div>
+                  <div className="main-child-2"> 
                       { detailsCard }
-                    </div>
-                </div>
+                      
+                  </div>
+                  </div>
     }
   } 
 
