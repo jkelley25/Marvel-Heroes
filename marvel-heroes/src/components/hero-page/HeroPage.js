@@ -2,32 +2,49 @@ import React from 'react';
 import md5 from 'js-md5';
 import './HeroPage.css';
 import ComicList from '../comic-list/ComicList';
-
+import DetailsCard from '../details-card/DetailsCard';
 class HeroPage extends React.Component {
   constructor(props) {
     super(props);
-    this.viewSide = this.viewSide.bind(this);
+    this.handleOpenCard = this.handleOpenCard.bind(this);
+    this.handleCloseCard = this.handleCloseCard.bind(this);
     this.state = {
         isLoaded: false,
         comicsData: [],
         seriesData: [],
-        viewSide: false,
+        viewCard: false,
         content: [],
     };
   }
 
-  viewSide(comic) {
+  // Function to handle opening of details card, passed as prop to 
+  // ComicList component 
+  handleOpenCard(comic) {
     this.setState({
-      viewSide: true,
+      viewCard: true,
       content: comic,
+    })
+  }
+
+  // Function to handle closing of details card, passed as prop
+  // to DetailsCard component  
+  handleCloseCard() {
+    this.setState({
+      viewCard: false,
     })
   }
 
   render() {
     const  { data } = this.props.location.state; // get hero data from previous page
-    const  {isLoaded , comicsData, seriesData, viewSide, content}  = this.state;
+    const  {isLoaded , comicsData, seriesData, viewCard, content}  = this.state;
     
+    // Check if a comic/series/story is clicked, and show details card
+    let detailsCard = null;
+    if(viewCard) {
+      detailsCard = <DetailsCard open={viewCard} close={this.handleCloseCard} contentData={content}/>;
+    }
 
+    // Wait for data to be populated
     if(!isLoaded || comicsData === [] || seriesData === []) {
         return <div> Loading... </div>
     } else {
@@ -46,13 +63,13 @@ class HeroPage extends React.Component {
                       {/* Display ComicPreview components using comics array */}
                       <h3 className="featured-content"> Featured comics </h3>
                       <div className="content-container">
-                        <ComicList comicsArray={comicsData} viewComic={this.viewSide}/>
+                        <ComicList comicsArray={comicsData} viewComic={this.handleOpenCard}/>
                       </div>
                       <h3 className="featured-content"> Featured Series </h3>
                     </div>
-                    {/* <div className="main-child-2"> 
-                      { sideBar }
-                    </div> */}
+                    <div className="main-child-2"> 
+                      { detailsCard }
+                    </div>
                 </div>
     }
   } 

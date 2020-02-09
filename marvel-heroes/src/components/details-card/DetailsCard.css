@@ -1,0 +1,32 @@
+.overlay-div *{
+    color: honeydew;
+}
+
+.overlay-div{
+    width: 40vw;
+    border: 1px solid black;
+    background-color: rgba(95, 81, 81, 0.945);
+    height: 80vh;
+    position: fixed;
+    top: 10vh;
+    overflow-y: scroll;
+}
+
+.close {
+    position: sticky;
+}
+
+
+.content img {
+    position: relative;
+    width: 400px;
+    height: 500px;
+    left: 15%;
+}
+
+.content h2 {
+    text-align: center;
+}
+.content p {
+    margin: 0 10px 0 10px;
+}
