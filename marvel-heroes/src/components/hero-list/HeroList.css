@@ -11,8 +11,7 @@
     /* For mobile phones: */
     .hero-list{
         width: 100vw;
-        transform: translateX(-12vw);
-        justify-content: space-around;
+        justify-content: space-evenly;
     }
 }
 

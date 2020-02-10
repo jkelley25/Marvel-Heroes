@@ -26,7 +26,11 @@
 @media only screen and (max-width: 600px) {
     /* For mobile phones: */
     .hero-details{
-        position: relative;
+        width: 100vw;
+    }
+    .thumb-nail {
+        width: 80vw;
+        height: auto;
     }
 }
 
