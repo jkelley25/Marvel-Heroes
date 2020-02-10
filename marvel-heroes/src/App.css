@@ -2,17 +2,49 @@
   text-align: center;
 }
 
-/* .App {
-  display: flex;
-  flex-direction: column;
-} */
+.App {
+
+}
+
+.home {
+  position: absolute;
+}
+
+.overview {
+  background-color: rgba(0, 0, 0, 0.801);
+  z-index: 99;
+  transform: translateY(-30px);
+}
+
+.overview img {
+  width: 100vw;
+  height: 70vh;
+  opacity: 50%;
+}
+
+.logo {
+  display: block;
+  margin: auto;
+  height: 10vh;
+}
 
 .nav-bar {
   border: 0.1px solid black;
   margin-bottom: 30px;
-  background-color: rgb(90, 90, 90);
+  background-color: #202020;
   width: 100vw;
   height: 10vh;
   z-index: 99;
   display: block;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: red; 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #b30000; 
 }

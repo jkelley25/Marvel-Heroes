@@ -28,7 +28,7 @@ class HeroList extends React.Component {
         const privateKey = 'ff44785d728a56986cb8ac72f16bb8c3d845d3e5';
         const publicKey = '9f2429a78761f3a7e5e95028cbaae945';
         const hash = md5(ts+privateKey+publicKey);
-        const limit = 50;
+        const limit = 5;
         const baseQuery = 'http://gateway.marvel.com/v1/public/characters?'
         
         var request; 
@@ -75,7 +75,7 @@ class HeroList extends React.Component {
             offset: 0
         })
     }
-    
+
     handleOrderChange = (event) => {
         this.setState({
             order: event.target.value,
