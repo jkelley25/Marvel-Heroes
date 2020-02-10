@@ -1,0 +1,17 @@
+.hero-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    width: 80vw;
+    
+}
+
+@media only screen and (max-width: 600px) {
+    /* For mobile phones: */
+    .hero-list{
+        width: 100vw;
+        transform: translateX(-12vw);
+        justify-content: space-around;
+    }
+}

@@ -15,7 +15,7 @@ class HeroDetails extends React.Component {
             <img className="thumb-nail" src={`${data.thumbnail.path}.${data.thumbnail.extension}`}
              alt="Hero Thumbnail"/>
             <h2>{data.name}</h2>
-            <p className="description">{data.description}</p>
+            {/* <p className="description">{data.description}</p> */}
 
             <Link to={{
                 pathname: `/hero/${data.id}`,

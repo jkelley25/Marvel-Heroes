@@ -1,6 +1,7 @@
 import React from 'react';
 import md5 from 'js-md5';
 import HeroDetails from '../hero-details/HeroDetails';
+import './HeroList.css'
 
 
 class HeroList extends React.Component {
@@ -10,7 +11,9 @@ class HeroList extends React.Component {
             isLoaded: false,
             data: [],
             name: '',
-            nameStart: ''
+            nameStart: '',
+            order: 'Ascending',
+            offset: 0,
         }
     }
 
@@ -19,24 +22,30 @@ class HeroList extends React.Component {
         this.fetchData(); // fetch initial data 
     }
 
-    fetchData(name, nameStart) {
+    fetchData() {
         // Hash required for api fetch 
         const ts = Date.now();
         const privateKey = 'ff44785d728a56986cb8ac72f16bb8c3d845d3e5';
         const publicKey = '9f2429a78761f3a7e5e95028cbaae945';
         const hash = md5(ts+privateKey+publicKey);
-        const limit = 20;
+        const limit = 50;
         const baseQuery = 'http://gateway.marvel.com/v1/public/characters?'
-
-        var request; 
-        if (name !== undefined) {
-            request = `${baseQuery}name=${name}&ts=${ts}&apikey=${publicKey}&hash=${hash}`;
-        } else if (nameStart) {
-            request = `${baseQuery}nameStartsWith${nameStart}&orderBy=name&limit=${limit}&ts=${ts}&apikey=${publicKey}&hash=${hash}`;
-        } else {
-            request = `${baseQuery}limit=${limit}&ts=${ts}&apikey=${publicKey}&hash=${hash}`;
-        }
         
+        var request; 
+        if (this.state.name !== '') {
+            // query character name 
+            request = `${baseQuery}name=${this.state.name}&ts=${ts}&apikey=${publicKey}&hash=${hash}&offset=${this.state.offset}`; 
+        } else if (this.state.nameStart !== '') {
+            // query starting letter of name
+            if(this.state.order === 'Ascending') {
+                request = `${baseQuery}nameStartsWith=${this.state.nameStart}&orderBy=name&limit=${limit}&ts=${ts}&apikey=${publicKey}&hash=${hash}&offset=${this.state.offset}`;
+            } else {
+                request = `${baseQuery}nameStartsWith=${this.state.nameStart}&orderBy=-name&limit=${limit}&ts=${ts}&apikey=${publicKey}&hash=${hash}&offset=${this.state.offset}`;
+            }
+        } else {
+            request = this.checkQueryOrder(request, baseQuery, limit, ts, publicKey, hash);
+        }
+        // fetch request and set state
         fetch(request)
         .then(res => res.json())
         .then((result) => {
@@ -45,9 +54,6 @@ class HeroList extends React.Component {
                 data: result,
             });
           },
-          // Note: it's important to handle errors here
-          // instead of a catch() block so that we don't swallow
-          // exceptions from actual bugs in components.
           (error) => {
             this.setState({
               isLoaded: true,
@@ -63,12 +69,46 @@ class HeroList extends React.Component {
         })
     }
 
+    handleLetterChange = (event) => {
+        this.setState({
+            nameStart: event.target.value,
+            offset: 0
+        })
+    }
+    
+    handleOrderChange = (event) => {
+        this.setState({
+            order: event.target.value,
+            offset: 0
+        })
+    }
+
     handleSubmit = (event) => {
        this.setState({
            data: [],
-           isLoaded: false
+           isLoaded: false,
+           offset: 0
        });
-       this.fetchData(this.state.name);
+       this.fetchData();
+    }
+
+    checkQueryOrder(request, baseQuery, limit, ts, publicKey, hash) {
+        if (this.state.order === 'Ascending') {
+            request = `${baseQuery}&orderBy=name&limit=${limit}&ts=${ts}&apikey=${publicKey}&hash=${hash}&offset=${this.state.offset}`;
+        }
+        else {
+            request = `${baseQuery}&orderBy=-name&limit=${limit}&ts=${ts}&apikey=${publicKey}&hash=${hash}&offset=${this.state.offset}`;
+        }
+        return request;
+    }
+
+    handleNextClick = (event) => {
+        this.setState({
+            data: [],
+            isLoaded: false,
+            offset: this.state.offset + 5,
+        });
+        this.fetchData();
     }
 
     render() {
@@ -78,15 +118,31 @@ class HeroList extends React.Component {
         } else {
             return (
                 <div className="App">
-                    <form onSubmit={ this.handleSubmit}>
                         <div className="filter">
-                        <label> Limit 
+                        {/* <label> Search name 
                             <input type="text" value={this.state.name} onChange={this.handleNameChange}></input>
-                        </label>
-                        <button type="submit">Search</button>
+                        </label> */}
+                        <label>  Filter search </label>
+
+                        <select value={this.state.nameStart} onChange={this.handleLetterChange}>
+                            <option >A</option>
+                            <option >B</option>
+                            <option >C</option>
+                            <option >D</option>
+                        </select>
+                        <select value={this.state.order} onChange={this.handleOrderChange }>
+                            <option> Ascending </option>
+                            <option> Descending </option>
+                        </select>
+                        <button type="submit" onClick={this.handleSubmit}>Filter</button>
                         </div>
-                    </form>
-                    {data.data.results.map((hero, index) => <HeroDetails heroDetails={hero} key={index}  />)}
+                        <div className="hero-list">
+                            {data.data.results.map((hero, index) => <HeroDetails heroDetails={hero} key={index}  />)}
+                            
+                        </div>
+                        <button onClick={this.handleBackClick}> Go back </button> 
+                        <button onClick={this.handleNextClick}> Show next characters </button>
+
                 </div>
             ); 
         }
