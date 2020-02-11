@@ -6,20 +6,28 @@
 
 }
 
-.home {
-  position: absolute;
-}
-
 .overview {
   background-color: rgba(0, 0, 0, 0.801);
   z-index: 99;
   transform: translateY(-30px);
+  width: 100vw;
+  height: 20vh;
 }
 
 .overview img {
-  width: 100vw;
-  height: 70vh;
+  width: 80vw;
+  height: auto;
   opacity: 50%;
+  position: absolute;
+}
+
+.overview h1 {
+  text-align: center;
+  color: antiquewhite;
+  line-height: 20vh;
+  position: sticky;
+  margin: 0;
+  padding: 0;
 }
 
 .logo {

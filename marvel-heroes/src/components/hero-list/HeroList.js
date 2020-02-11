@@ -14,13 +14,22 @@ class HeroList extends React.Component {
             nameStart: '',
             order: 'Ascending',
             offset: 0,
+            limit: 20,
         }
     }
 
     // Fetch request to Marvel api upon mounting
     componentDidMount() {
-        console.log(this.props.match.params);
-        this.fetchData(); // fetch initial data 
+        // check if coming from a character's page
+        if(this.props.location.state !== undefined) {
+            this.setState({
+                offset: this.props.location.state.prevOffset.offset ,
+            }, () => {
+                this.fetchData(); // fetch initial data 
+            });
+        } else {
+            this.fetchData(); // else just fetch initial data 
+        }
     }
 
     fetchData() {
@@ -29,7 +38,7 @@ class HeroList extends React.Component {
         const privateKey = 'ff44785d728a56986cb8ac72f16bb8c3d845d3e5';
         const publicKey = '9f2429a78761f3a7e5e95028cbaae945';
         const hash = md5(ts+privateKey+publicKey);
-        const limit = 5;
+        const limit = this.state.limit;
         const baseQuery = 'http://gateway.marvel.com/v1/public/characters?'
         
         var request; 
@@ -131,9 +140,19 @@ class HeroList extends React.Component {
 
     render() {
         const { isLoaded, data } = this.state; // get results array of heroes
-        
+        // Loading screen
         if(!isLoaded) {
-            return <div>Loading...</div>;
+            return <div class="sk-cube-grid">
+            <div class="sk-cube sk-cube1"></div>
+            <div class="sk-cube sk-cube2"></div>
+            <div class="sk-cube sk-cube3"></div>
+            <div class="sk-cube sk-cube4"></div>
+            <div class="sk-cube sk-cube5"></div>
+            <div class="sk-cube sk-cube6"></div>
+            <div class="sk-cube sk-cube7"></div>
+            <div class="sk-cube sk-cube8"></div>
+            <div class="sk-cube sk-cube9"></div>
+          </div>;
         } else {
             return (
                 <div className="App">
@@ -141,25 +160,27 @@ class HeroList extends React.Component {
                         {/* <label> Search name 
                             <input type="text" value={this.state.name} onChange={this.handleNameChange}></input>
                         </label> */}
-                        <label>  Filter search </label>
-
+                        <label>  <h3>Filter search: </h3>  </label>
+                        <label> <p>Name Start with - </p></label>
                         <select value={this.state.nameStart} onChange={this.handleLetterChange}>
                             <option >A</option>
                             <option >B</option>
                             <option >C</option>
                             <option >D</option>
                         </select>
+
+                        <label> <p>Order By  - </p></label>
                         <select value={this.state.order} onChange={this.handleOrderChange }>
                             <option> Ascending </option>
                             <option> Descending </option>
                         </select>
-                        <button onClick={this.handleSubmit}>Filter</button>
+                        <button onClick={this.handleSubmit}>Go</button>
                         </div>
                         <div className="hero-list">
                             {data.data.results.map((hero, index) =><HeroDetails heroDetails={hero} key={index} offset={this.state.offset}/>)}
                         </div>
-                        <button onClick={this.handleBackClick}> Go back </button> 
-                        <button className="right-button" onClick={this.handleNextClick}> Show next characters </button>
+                        <button className="custom-button" onClick={this.handleBackClick}> Go back </button> 
+                        <button className="right-button custom-button" onClick={this.handleNextClick}> Show next characters </button>
                 </div>
             ); 
         }

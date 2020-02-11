@@ -4,8 +4,8 @@ import './HeroPage.css';
 import ComicList from '../comic-list/ComicList';
 import DetailsCard from '../details-card/DetailsCard';
 import SeriesList from '../series-list/SeriesList';
-import { BrowserRouter as Router, Link } from 'react-router-dom';
-import App from '../../App';
+import { BrowserRouter as Router, Link, Route, Redirect } from 'react-router-dom';
+import HeroList from '../hero-list/HeroList';
 
 class HeroPage extends React.Component {
   constructor(props) {
@@ -41,14 +41,21 @@ class HeroPage extends React.Component {
 
   componentWillUnmount() {
     this.setState({
-      back: true,
-    });
+      back: true
+    })
+
+    console.log(this.props.match.params);
   }
 
   render() {
     const  { data } = this.props.location.state; // get hero data from previous page
     const  {isLoaded , comicsData, seriesData, viewCard, content}  = this.state;
-    const { offset } = this.props.match.params;
+    const { prevOffset } = this.props.match.params;
+    let test = false;
+
+    window.onpopstate = (event) => {
+      test = true;
+    }
 
     // Check if a comic/series/story is clicked, and show details card
     let detailsCard = null;
@@ -56,19 +63,23 @@ class HeroPage extends React.Component {
       detailsCard = <DetailsCard open={viewCard} close={this.handleCloseCard} contentData={content}/>;
     }
 
-    
     // Pass the offset to homepage
-    // if(this.state.back) {
-    //   return <Link to={{
-    //     pathname: `/${offset.offset}`,
-
-    //     }}></Link>
-    // }
+    if(this.state.back) {
+      return <div>
+                <Redirect to={{ 
+                  pathname: '/',
+                  state: { prevOffset: this.props.match.params} }}/>
+              </div> 
+    }
     // Wait for data to be populated
     if(!isLoaded || comicsData === [] || seriesData === []) {
         return <div> Loading... </div>
     } else {
         return <div className="main-container">
+          <Link to={{
+        pathname: '/',
+        state: { prevOffset: this.props.match.params}
+        }}> <h1>Back to search </h1></Link>
                   <div className="main-child-1">
                     <div className="hero-summary">
                       <div className="hero-child-1">
