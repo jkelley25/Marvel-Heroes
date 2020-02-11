@@ -1,7 +1,7 @@
 # Marvel-Heroes
 A simple single page application utilizing the Marvel API 
 
-# Install Usage
+# Installation and Usage
 Clone the repository
 
 [Install NodeJs if it isn't already installed](https://nodejs.org/en/)
