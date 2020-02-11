@@ -43,8 +43,6 @@ class HeroPage extends React.Component {
     this.setState({
       back: true
     })
-
-    console.log(this.props.match.params);
   }
 
   render() {
@@ -117,7 +115,6 @@ class HeroPage extends React.Component {
         const limit = 10;
 
         const request = `http://gateway.marvel.com/v1/public/characters/${characterId}/${content}?limit=${limit}&ts=${ts}&apikey=9f2429a78761f3a7e5e95028cbaae945&hash=${hash}`;
-        console.log(request);
         fetch(request)
         .then(res => res.json())
         .then((result) => {

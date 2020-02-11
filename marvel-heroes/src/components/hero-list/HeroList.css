@@ -63,7 +63,9 @@ a:visited {
 @media only screen and (max-width: 600px) {
     /* For mobile phones: */
     .hero-list{
-        justify-content: space-evenly;
+        justify-content: space-around;
+        width: 100vw;
+        transform: translateX(0);
     }
 
     .custom-button {

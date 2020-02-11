@@ -115,7 +115,7 @@ class HeroList extends React.Component {
     // Function to handle showing next characters, 
     // it increasing the offset value and re-fetches the api
     handleNextClick = (event) => {
-        const newOffset = this.state.offset + 5;
+        const newOffset = this.state.offset + this.state.limit;
         this.setState({
             data: [],
             isLoaded: false,
@@ -128,7 +128,7 @@ class HeroList extends React.Component {
     // Function to handle going back to previous characters, 
     // by reducing the offset value and re-fetches the api
     handleBackClick = (event) => {
-        const newOffset = this.state.offset - 5;
+        const newOffset = this.state.offset - this.state.limit;
         this.setState({
             data: [],
             isLoaded: false,
@@ -140,6 +140,7 @@ class HeroList extends React.Component {
 
     render() {
         const { isLoaded, data } = this.state; // get results array of heroes
+        var alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
         // Loading screen
         if(!isLoaded) {
             return <div class="sk-cube-grid">
@@ -162,12 +163,10 @@ class HeroList extends React.Component {
                         </label> */}
                         <label>  <h3>Filter search: </h3>  </label>
                         <label> <p>Name Start with - </p></label>
-                        <select value={this.state.nameStart} onChange={this.handleLetterChange}>
-                            <option >A</option>
-                            <option >B</option>
-                            <option >C</option>
-                            <option >D</option>
+                        <select id="options" value={this.state.nameStart} onChange={this.handleLetterChange}>
+                            {alphabet.map((x,y) => <option key={y}>{x}</option>)}
                         </select>
+                        
 
                         <label> <p>Order By  - </p></label>
                         <select value={this.state.order} onChange={this.handleOrderChange }>

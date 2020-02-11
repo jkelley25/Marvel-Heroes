@@ -17,6 +17,7 @@
 .back-search{
     position: absolute;
     margin-left: 10px;
+    color: #ED1D24;
 }
 
 .back-search:hover {

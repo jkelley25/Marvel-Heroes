@@ -11,6 +11,8 @@
 }
 .hero-details p {
     text-align: start;
+    font-weight: 600;
+    font-size: large;
 }
 
 .hero-details p:hover {
