@@ -22,6 +22,7 @@ function App() {
       <BrowserRouter>
       <Switch>
         <Route path='/' exact component={ HeroList }/>
+        <Route path='/:offset' exact component={ HeroList }/>
         <Route path='/hero/:id/:offset/' exact component={ HeroPage } />
         <Route path='/' render={() => <div>404</div>} />
       </Switch>

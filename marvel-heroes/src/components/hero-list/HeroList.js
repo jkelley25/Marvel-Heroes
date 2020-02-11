@@ -19,10 +19,8 @@ class HeroList extends React.Component {
 
     // Fetch request to Marvel api upon mounting
     componentDidMount() {
+        console.log(this.props.match.params);
         this.fetchData(); // fetch initial data 
-        this.setState({
-            offset: 5
-        })
     }
 
     fetchData() {
@@ -105,32 +103,34 @@ class HeroList extends React.Component {
         return request;
     }
 
+    // Function to handle showing next characters, 
+    // it increasing the offset value and re-fetches the api
     handleNextClick = (event) => {
+        const newOffset = this.state.offset + 5;
         this.setState({
             data: [],
             isLoaded: false,
-            offset: this.state.offset + 5,
+            offset: newOffset,
+        }, () => {
+            this.fetchData();
         });
-        console.log(this.state.offset);
-        this.fetchData();
     }
 
+    // Function to handle going back to previous characters, 
+    // by reducing the offset value and re-fetches the api
     handleBackClick = (event) => {
         const newOffset = this.state.offset - 5;
         this.setState({
             data: [],
             isLoaded: false,
             offset: newOffset,
+        }, () => {
+            this.fetchData();
         });
-        console.log(this.state.offset);
-        this.fetchData();
     }
 
     render() {
         const { isLoaded, data } = this.state; // get results array of heroes
-        if(this.props.location.state !== undefined) {
-            console.log(this.props.location.state);
-        }
         
         if(!isLoaded) {
             return <div>Loading...</div>;
@@ -156,7 +156,7 @@ class HeroList extends React.Component {
                         <button onClick={this.handleSubmit}>Filter</button>
                         </div>
                         <div className="hero-list">
-                            {data.data.results.map((hero, index) => <HeroDetails heroDetails={hero} key={index} offset={this.state.offset}  />)}
+                            {data.data.results.map((hero, index) =><HeroDetails heroDetails={hero} key={index} offset={this.state.offset}/>)}
                         </div>
                         <button onClick={this.handleBackClick}> Go back </button> 
                         <button className="right-button" onClick={this.handleNextClick}> Show next characters </button>

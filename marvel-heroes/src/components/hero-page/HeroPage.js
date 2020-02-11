@@ -5,6 +5,7 @@ import ComicList from '../comic-list/ComicList';
 import DetailsCard from '../details-card/DetailsCard';
 import SeriesList from '../series-list/SeriesList';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
+import App from '../../App';
 
 class HeroPage extends React.Component {
   constructor(props) {
@@ -41,17 +42,13 @@ class HeroPage extends React.Component {
   componentWillUnmount() {
     this.setState({
       back: true,
-    })
-    console.log(this.props.match.params);
+    });
   }
+
   render() {
     const  { data } = this.props.location.state; // get hero data from previous page
     const  {isLoaded , comicsData, seriesData, viewCard, content}  = this.state;
     const { offset } = this.props.match.params;
-    // Check if back/forward button is clicked
-    window.onpopstate = function() {
-      // this.history.pushState()
-    }
 
     // Check if a comic/series/story is clicked, and show details card
     let detailsCard = null;
@@ -59,14 +56,14 @@ class HeroPage extends React.Component {
       detailsCard = <DetailsCard open={viewCard} close={this.handleCloseCard} contentData={content}/>;
     }
 
-    if(this.state.back) {
-      return <Link to={{
-        pathname: `/`,
-        state: {
-          offset: offset
-        }
-        }}>  </Link>
-    }
+    
+    // Pass the offset to homepage
+    // if(this.state.back) {
+    //   return <Link to={{
+    //     pathname: `/${offset.offset}`,
+
+    //     }}></Link>
+    // }
     // Wait for data to be populated
     if(!isLoaded || comicsData === [] || seriesData === []) {
         return <div> Loading... </div>
