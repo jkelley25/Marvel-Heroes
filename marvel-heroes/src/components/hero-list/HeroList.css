@@ -65,6 +65,11 @@ a:visited {
     .hero-list{
         justify-content: space-evenly;
     }
+
+    .custom-button {
+      width: 100px;
+      height: 40px;
+    }
 }
 
 /* Loading screen from https://tobiasahlin.com/spinkit/*/

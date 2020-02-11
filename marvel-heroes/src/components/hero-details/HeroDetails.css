@@ -13,6 +13,9 @@
     text-align: start;
 }
 
+.hero-details p:hover {
+    color: #ED1D24;
+}
 .thumb-nail {
     border-radius: 5px;
     width: 200px;
