@@ -20,6 +20,9 @@ class HeroList extends React.Component {
     // Fetch request to Marvel api upon mounting
     componentDidMount() {
         this.fetchData(); // fetch initial data 
+        this.setState({
+            offset: 5
+        })
     }
 
     fetchData() {
@@ -108,11 +111,27 @@ class HeroList extends React.Component {
             isLoaded: false,
             offset: this.state.offset + 5,
         });
+        console.log(this.state.offset);
+        this.fetchData();
+    }
+
+    handleBackClick = (event) => {
+        const newOffset = this.state.offset - 5;
+        this.setState({
+            data: [],
+            isLoaded: false,
+            offset: newOffset,
+        });
+        console.log(this.state.offset);
         this.fetchData();
     }
 
     render() {
         const { isLoaded, data } = this.state; // get results array of heroes
+        if(this.props.location.state !== undefined) {
+            console.log(this.props.location.state);
+        }
+        
         if(!isLoaded) {
             return <div>Loading...</div>;
         } else {
@@ -134,15 +153,13 @@ class HeroList extends React.Component {
                             <option> Ascending </option>
                             <option> Descending </option>
                         </select>
-                        <button type="submit" onClick={this.handleSubmit}>Filter</button>
+                        <button onClick={this.handleSubmit}>Filter</button>
                         </div>
                         <div className="hero-list">
-                            {data.data.results.map((hero, index) => <HeroDetails heroDetails={hero} key={index}  />)}
-                            
+                            {data.data.results.map((hero, index) => <HeroDetails heroDetails={hero} key={index} offset={this.state.offset}  />)}
                         </div>
                         <button onClick={this.handleBackClick}> Go back </button> 
-                        <button onClick={this.handleNextClick}> Show next characters </button>
-
+                        <button className="right-button" onClick={this.handleNextClick}> Show next characters </button>
                 </div>
             ); 
         }

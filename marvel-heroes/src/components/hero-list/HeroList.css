@@ -4,9 +4,25 @@
     flex-wrap: wrap;
     justify-content: space-evenly;
     width: 80vw;
-    
+    position: relative;
+    overflow-y: visible;
 }
 
+
+button {
+    background-color: red;
+    width: 100px;
+    height: 50px;
+    color: whitesmoke;
+    font-weight: 600;
+    border-radius: 5px;
+    box-shadow: 0;
+}
+
+.right-button {
+    position: absolute;
+    right: 0;
+}
 @media only screen and (max-width: 600px) {
     /* For mobile phones: */
     .hero-list{
