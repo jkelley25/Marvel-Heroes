@@ -174,7 +174,7 @@ class HeroList extends React.Component {
                             <option> Ascending </option>
                             <option> Descending </option>
                         </select>
-                        <button onClick={this.handleSubmit}>Go</button>
+                        <button className="go-button" onClick={this.handleSubmit}>Go</button>
                         </div>
                         <div className="hero-list">
                             {data.data.results.map((hero, index) =><HeroDetails heroDetails={hero} key={index} offset={this.state.offset}/>)}

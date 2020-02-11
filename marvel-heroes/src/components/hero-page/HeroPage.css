@@ -14,6 +14,14 @@
     margin-bottom: 30px;
 }
 
+.back-search{
+    position: absolute;
+    margin-left: 10px;
+}
+
+.back-search:hover {
+    color: rgb(189, 82, 82);
+}
 .hero-summary {
     position: relative;
     left: 20vw;

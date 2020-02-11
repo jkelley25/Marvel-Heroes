@@ -77,9 +77,8 @@ class HeroPage extends React.Component {
     } else {
         return <div className="main-container">
           <Link to={{
-        pathname: '/',
-        state: { prevOffset: this.props.match.params}
-        }}> <h1>Back to search </h1></Link>
+              pathname: '/',
+              state: { prevOffset: this.props.match.params}}}> <h3 className="back-search">Back to search </h3></Link>
                   <div className="main-child-1">
                     <div className="hero-summary">
                       <div className="hero-child-1">
