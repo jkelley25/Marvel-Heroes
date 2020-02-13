@@ -10,7 +10,7 @@ class DetailsCard extends React.Component {
     };
   }
 
-  // Close card, this renders a null component
+  // Handle closing card, this renders a null component
   handleClose() {
     this.setState({
         open: false,
@@ -43,12 +43,6 @@ class DetailsCard extends React.Component {
       } else {
           return null;
       }
-  }
-
-  componentDidMount() {
-    this.setState({
-      someKey: 'otherValue'
-    });
   }
 }
 

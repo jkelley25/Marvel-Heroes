@@ -9,9 +9,10 @@
 .overview {
   background-color: rgba(0, 0, 0, 0.801);
   z-index: 99;
-  transform: translateY(-30px);
+  transform: translateY(60px);
   width: 100vw;
-  height: 20vh;
+  height: 18vh;
+  margin-bottom: 100px;
 }
 
 .overview img {
@@ -37,6 +38,16 @@
   }
 }
 
+.nav-icons{
+  position: absolute;
+  display: flex;
+  margin: 10px 0 0 20px;
+}
+
+.home-button {
+  margin-right: 10px;
+}
+
 .logo {
   display: block;
   margin: auto;
@@ -44,6 +55,7 @@
 }
 
 .nav-bar {
+  position: fixed;
   border: 0.1px solid black;
   margin-bottom: 30px;
   background-color: #202020;
@@ -53,13 +65,3 @@
   display: block;
 }
 
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: red; 
-  border-radius: 10px;
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #b30000; 
-}

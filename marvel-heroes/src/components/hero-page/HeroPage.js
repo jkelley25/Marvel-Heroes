@@ -48,7 +48,6 @@ class HeroPage extends React.Component {
   render() {
     const  { data } = this.props.location.state; // get hero data from previous page
     const  {isLoaded , comicsData, seriesData, viewCard, content}  = this.state;
-    const { prevOffset } = this.props.match.params;
     let test = false;
 
     window.onpopstate = (event) => {
@@ -61,14 +60,6 @@ class HeroPage extends React.Component {
       detailsCard = <DetailsCard open={viewCard} close={this.handleCloseCard} contentData={content}/>;
     }
 
-    // Pass the offset to homepage
-    if(this.state.back) {
-      return <div>
-                <Redirect to={{ 
-                  pathname: '/',
-                  state: { prevOffset: this.props.match.params} }}/>
-              </div> 
-    }
     // Wait for data to be populated
     if(!isLoaded || comicsData === [] || seriesData === []) {
         return <div> Loading... </div>
@@ -76,7 +67,10 @@ class HeroPage extends React.Component {
         return <div className="main-container">
           <Link to={{
               pathname: '/',
-              state: { prevOffset: this.props.match.params}}}> <h3 className="back-search">Back to search </h3></Link>
+              state: {prevOffset: this.props.location.state.offset,
+                      prevRequest: this.props.location.state.request}}}> 
+                <h3 className="back-search">Back to search </h3>
+          </Link>
                   <div className="main-child-1">
                     <div className="hero-summary">
                       <div className="hero-child-1">

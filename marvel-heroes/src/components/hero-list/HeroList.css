@@ -58,7 +58,8 @@ a:visited {
 
 .right-button {
     position: absolute;
-    right: 0;
+    left: 50vw;
+    transform: translateX(-100px);
 }
 @media only screen and (max-width: 600px) {
     /* For mobile phones: */

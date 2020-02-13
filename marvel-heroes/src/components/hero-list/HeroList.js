@@ -15,16 +15,19 @@ class HeroList extends React.Component {
             order: 'Ascending',
             offset: 0,
             limit: 20,
+            request: '',
         }
     }
 
     // Fetch request to Marvel api upon mounting
     componentDidMount() {
         // check if coming from a character's page
-        if(this.props.location.state !== undefined) {
+        if(this.props.location.state !== null) {
             this.setState({
-                offset: this.props.location.state.prevOffset.offset ,
+                offset: this.props.location.state.prevOffset ,
+                request: this.props.location.state.prevRequest,
             }, () => {
+                console.log(this.state.request);
                 this.fetchData(); // fetch initial data 
             });
         } else {
@@ -42,6 +45,7 @@ class HeroList extends React.Component {
         const baseQuery = 'http://gateway.marvel.com/v1/public/characters?'
         
         var request; 
+        // check if request state is not empty, ie not coming from a character's page
         if (this.state.name !== '') {
             // query character name 
             request = `${baseQuery}name=${this.state.name}&ts=${ts}&apikey=${publicKey}&hash=${hash}&offset=${this.state.offset}`; 
@@ -55,6 +59,7 @@ class HeroList extends React.Component {
         } else {
             request = this.checkQueryOrder(request, baseQuery, limit, ts, publicKey, hash);
         }
+    
         // fetch request and set state
         fetch(request)
         .then(res => res.json())
@@ -62,6 +67,7 @@ class HeroList extends React.Component {
             this.setState({ 
                 isLoaded: true,
                 data: result,
+                request: request
             });
           },
           (error) => {
@@ -114,7 +120,7 @@ class HeroList extends React.Component {
 
     // Function to handle showing next characters, 
     // it increasing the offset value and re-fetches the api
-    handleNextClick = (event) => {
+    handleShowMore = (event) => {
         const newOffset = this.state.offset + this.state.limit;
         this.setState({
             data: [],
@@ -140,7 +146,7 @@ class HeroList extends React.Component {
 
     render() {
         const { isLoaded, data } = this.state; // get results array of heroes
-        var alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+        var alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(""); // options
         // Loading screen
         if(!isLoaded) {
             return <div class="sk-cube-grid">
@@ -176,14 +182,12 @@ class HeroList extends React.Component {
                         <button className="go-button" onClick={this.handleSubmit}>Go</button>
                         </div>
                         <div className="hero-list">
-                            {data.data.results.map((hero, index) =><HeroDetails heroDetails={hero} key={index} offset={this.state.offset}/>)}
+                            {data.data.results.map((hero, index) =><HeroDetails heroDetails={hero} key={index} offset={this.state.offset} request= {this.state.request }/>)}
                         </div>
-                        <button className="custom-button" onClick={this.handleBackClick}> Go back </button> 
-                        <button className="right-button custom-button" onClick={this.handleNextClick}> Show next characters </button>
+                        <button className="right-button custom-button" onClick={this.handleShowMore}> Show more characters </button>
                 </div>
             ); 
         }
-
     }
 
 }

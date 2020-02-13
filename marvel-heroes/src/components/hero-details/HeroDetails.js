@@ -6,16 +6,17 @@ class HeroDetails extends React.Component {
     render() {
         const data = this.props.heroDetails;
         const offset = this.props.offset;
+        const request = this.props.request;
         // check if there is a hero description
         if(data.description === ''){
             data.description = 'No description data';
         }
-        
+
         return (
         <div className="hero-details">
             <Link to={{
                 pathname: `/hero/${data.id}/${offset}`,
-                state: { data, offset } 
+                state: { data, offset, request } 
                 }}> 
                         <img className="thumb-nail" src={`${data.thumbnail.path}.${data.thumbnail.extension}`}
              alt="Hero Thumbnail"/>
