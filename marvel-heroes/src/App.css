@@ -2,10 +2,6 @@
   text-align: center;
 }
 
-.App {
-
-}
-
 .overview {
   background-color: rgba(0, 0, 0, 0.801);
   z-index: 99;
@@ -52,6 +48,10 @@
   display: block;
   margin: auto;
   height: 10vh;
+}
+
+.logo:hover {
+  cursor: pointer;
 }
 
 .nav-bar {

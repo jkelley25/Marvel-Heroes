@@ -48,11 +48,7 @@ class HeroPage extends React.Component {
   render() {
     const  { data } = this.props.location.state; // get hero data from previous page
     const  {isLoaded , comicsData, seriesData, viewCard, content}  = this.state;
-    let test = false;
-
-    window.onpopstate = (event) => {
-      test = true;
-    }
+    const newRequest = {...this.props.location.state.request, visited: true};
 
     // Check if a comic/series/story is clicked, and show details card
     let detailsCard = null;
@@ -66,9 +62,8 @@ class HeroPage extends React.Component {
     } else {
         return <div className="main-container">
           <Link to={{
-              pathname: '/',
-              state: {prevOffset: this.props.location.state.offset,
-                      prevRequest: this.props.location.state.request}}}> 
+              pathname: '/search',
+              state: { prevRequest: newRequest}}}> 
                 <h3 className="back-search">Back to search </h3>
           </Link>
                   <div className="main-child-1">
