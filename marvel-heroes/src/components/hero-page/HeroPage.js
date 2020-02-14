@@ -49,6 +49,7 @@ class HeroPage extends React.Component {
     const  { data } = this.props.location.state; // get hero data from previous page
     const  {isLoaded , comicsData, seriesData, viewCard, content}  = this.state;
     const newRequest = {...this.props.location.state.request, visited: true};
+    const charactersData = this.props.location.state.characters;
 
     // Check if a comic/series/story is clicked, and show details card
     let detailsCard = null;
@@ -63,7 +64,7 @@ class HeroPage extends React.Component {
         return <div className="main-container">
           <Link to={{
               pathname: '/search',
-              state: { prevRequest: newRequest}}}> 
+              state: { prevRequest: newRequest, prevData: charactersData}}}> 
                 <h3 className="back-search">Back to search </h3>
           </Link>
                   <div className="main-child-1">

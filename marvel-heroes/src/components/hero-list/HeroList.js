@@ -41,12 +41,11 @@ class HeroList extends React.Component {
     componentDidMount() {
         // Check if coming from a character page, if so update with previous request 
         if(this.props.location.state ) {
-            console.log(this.props.location.state);
             this.setState({
-                request: this.props.location.state.prevRequest
-            }, () => {
-                this.fetchData();
-            })
+                request: this.props.location.state.prevRequest,
+                data: this.props.location.state.prevData,
+                isLoaded: true,
+            });
         } else {
             this.fetchData();
         }
