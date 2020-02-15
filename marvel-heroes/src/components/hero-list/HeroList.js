@@ -26,7 +26,7 @@ class HeroList extends React.Component {
         this.state = {
             isLoaded: false,
             data: [],
-            showMore: false,
+            showMore: true,
             request: {
                 name: '',
                 nameStart: '',
@@ -135,6 +135,7 @@ class HeroList extends React.Component {
                 data: [],
                 isLoaded: false,
                 showMore: false,
+                request: {...this.state.request, ...{nameStart: '', offset: 0}},
             }, () => {
                 this.fetchData();
                 this.setState({
@@ -171,7 +172,8 @@ class HeroList extends React.Component {
         let showMoreButton = null;
         // only show button if not searching by name
         if(this.state.request.name === '' && this.state.showMore) {
-            showMoreButton = <button className="right-button custom-button" onClick={this.handleShowMore}> Show more characters </button>
+            showMoreButton = <button className="right-button custom-button" 
+                onClick={this.handleShowMore}> Show more characters </button>
         }
         
         // Loading screen
