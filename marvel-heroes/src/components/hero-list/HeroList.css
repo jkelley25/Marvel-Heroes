@@ -23,6 +23,10 @@
     margin-right: 40px;
 }
 
+.filter input {
+  margin-left: 100px;
+}
+
 .filter p {
     display: inline;
     margin-right: 10px;

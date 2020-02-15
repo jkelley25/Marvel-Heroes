@@ -26,7 +26,7 @@ class HeroList extends React.Component {
         this.state = {
             isLoaded: false,
             data: [],
-
+            showMore: false,
             request: {
                 name: '',
                 nameStart: '',
@@ -59,13 +59,13 @@ class HeroList extends React.Component {
         const publicKey = '9f2429a78761f3a7e5e95028cbaae945';
         const hash = md5(ts+privateKey+publicKey);
         const limit = this.state.request.limit;
-        const baseQuery = 'http://gateway.marvel.com/v1/public/characters?'
+        const baseQuery = 'http://gateway.marvel.com/v1/public/characters?';
         
         var request; 
         // check if request state is not empty, ie not coming from a character's page
         if (this.state.request.name !== '') {
             // query character name 
-            request = `${baseQuery}name=${this.state.request.name}&ts=${ts}&apikey=${publicKey}&hash=${hash}&offset=${this.state.request.offset}`; 
+            request = `${baseQuery}name=${this.state.request.name}&limit=${limit}&ts=${ts}&apikey=${publicKey}&hash=${hash}&offset=${this.state.request.offset}`; 
         } else if (this.state.request.nameStart !== '') {
             // query starting letter of name
             if(this.state.request.order === 'Ascending') {
@@ -120,10 +120,28 @@ class HeroList extends React.Component {
        this.setState({
            data: [],
            isLoaded: false,
-           request: {...this.state.request, offset: 0}
+           showMore: true,
+           request: {...this.state.request, name: ''}
        }, () => {
         this.fetchData();
        });
+    }
+
+    handleSearch = (e) => {
+        // Check if enter key is pressed on input
+        if(e.key === 'Enter'){
+            // clear data array
+            this.setState({
+                data: [],
+                isLoaded: false,
+                showMore: false,
+            }, () => {
+                this.fetchData();
+                this.setState({
+                    request: {...this.state.request, name: ''}
+                })
+            });
+        }
     }
 
     checkQueryOrder(request, baseQuery, limit, ts, publicKey, hash) {
@@ -150,6 +168,12 @@ class HeroList extends React.Component {
     render() {
         const { isLoaded, data } = this.state; // get results array of heroes
         var alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(""); // options
+        let showMoreButton = null;
+        // only show button if not searching by name
+        if(this.state.request.name === '' && this.state.showMore) {
+            showMoreButton = <button className="right-button custom-button" onClick={this.handleShowMore}> Show more characters </button>
+        }
+        
         // Loading screen
         if(!isLoaded) {
             return <LoadingScreen/>
@@ -162,21 +186,24 @@ class HeroList extends React.Component {
                         </label> */}
                         <label>  <h3>Filter search: </h3>  </label>
                         <label> <p>Name Start with - </p></label>
-                        <select id="options" value={this.state.nameStart} onChange={this.handleLetterChange}>
+                        <select id="options" value={this.state.request.nameStart} 
+                            onChange={this.handleLetterChange}>
                             {alphabet.map((x,y) => <option key={y}>{x}</option>)}
                         </select>
                         <label> <p>Order By  - </p></label>
-                        <select value={this.state.order} onChange={this.handleOrderChange }>
+                        <select value={this.state.request.order} onChange={this.handleOrderChange }>
                             <option> Ascending </option>
                             <option> Descending </option>
                         </select>
                         <button className="go-button" onClick={this.handleSubmit}>Go</button>
+                        <input placeholder="Search by name" value={this.state.request.name} 
+                            onChange={this.handleNameChange} onKeyUp={this.handleSearch}></input>
                         </div>
                         <div className="hero-list">
                             {data.map((hero, index) =><HeroDetails heroDetails={hero} key={index}
                                  request={this.state.request} characters={ this.state.data}/>)}
                         </div>
-                        <button className="right-button custom-button" onClick={this.handleShowMore}> Show more characters </button>
+                        { showMoreButton }
                 </div>
             ); 
         }

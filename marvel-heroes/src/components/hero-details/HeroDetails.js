@@ -16,7 +16,7 @@ class HeroDetails extends React.Component {
         return (
         <div className="hero-details">
             <Link to={{
-                pathname: `/hero/${data.id}/${offset}`,
+                pathname: `/hero/${data.id}`,
                 state: { data, request, characters } 
                 }}> 
                         <img className="thumb-nail" src={`${data.thumbnail.path}.${data.thumbnail.extension}`}

@@ -30,7 +30,7 @@ function App() {
         <Switch>
           <Route path='/' exact component={ HomePage }/>
           <Route path='/search' exact component={ HeroList } />
-          <Route path='/hero/:id/:offset/' exact component={ HeroPage } />
+          <Route path='/hero/:id' exact component={ HeroPage } />
           <Route path='/' render={() => <div>404</div>} />
         </Switch>
     </div>
