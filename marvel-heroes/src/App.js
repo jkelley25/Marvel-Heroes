@@ -24,9 +24,6 @@ function App() {
         </div>
         <img className="logo" onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})} src={logo}></img>
       </div>
-      <div className="overview">
-        <h1>Explore The Marvel Universe </h1>
-      </div>
         <Switch>
           <Route path='/' exact component={ HomePage }/>
           <Route path='/search' exact component={ HeroList } />

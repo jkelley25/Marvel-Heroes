@@ -1,6 +1,9 @@
 import React from 'react';
 import HeroDetails from '../components/hero-details/HeroDetails';
 import md5 from 'js-md5';
+import heroImage from '../marvel.jpg';
+import avengersLogo from '.././avengers-logo.png';
+import './HomePage.css';
 class HomePage extends React.Component {
   constructor() {
     super();
@@ -46,9 +49,20 @@ class HomePage extends React.Component {
   }
 
   render() {
-    return <div>
-          {this.state.characters.map((hero, index) => <HeroDetails heroDetails={hero} key={index}/>)}
-          </div>;
+    return (
+      <div className="homepage-container">
+        <div className="hero-image">
+          <img src={ heroImage } alt="Hero image"/>
+        </div>
+        <div className="avengers">
+          <img className="avengers-logo" src = {avengersLogo} alt="avengers logo"/>
+          
+          <div className="featured-heroes">
+            {this.state.characters.map((hero, index) => <HeroDetails heroDetails={hero} key={index}/>)}
+          </div>
+        </div>
+      </div>
+    )
   }
 
   componentDidMount() {

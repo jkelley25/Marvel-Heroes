@@ -1,3 +1,8 @@
+.characters-page {
+  position: absolute;
+  top: 20vh;
+}
+
 .hero-list {    
     display: flex;
     flex-direction: row;
@@ -9,7 +14,7 @@
 }
 
 .filter {
-    display: block;
+
     padding-left: 40px ;
 }
 
@@ -83,7 +88,7 @@ a:visited {
 .sk-cube-grid {
     width: 40px;
     height: 40px;
-    margin: 100px auto;
+    transform: translateX(49vw);
   }
   
   .sk-cube-grid .sk-cube {

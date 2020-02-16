@@ -6,17 +6,17 @@ import './HeroList.css'
 // Simple loading screen component 
 const LoadingScreen = () => {
     return(
-        <div class="sk-cube-grid">
-        <div class="sk-cube sk-cube1"></div>
-        <div class="sk-cube sk-cube2"></div>
-        <div class="sk-cube sk-cube3"></div>
-        <div class="sk-cube sk-cube4"></div>
-        <div class="sk-cube sk-cube5"></div>
-        <div class="sk-cube sk-cube6"></div>
-        <div class="sk-cube sk-cube7"></div>
-        <div class="sk-cube sk-cube8"></div>
-        <div class="sk-cube sk-cube9"></div>
-      </div>
+        <div className="sk-cube-grid">
+            <div className="sk-cube sk-cube1"></div>
+            <div className="sk-cube sk-cube2"></div>
+            <div className="sk-cube sk-cube3"></div>
+            <div className="sk-cube sk-cube4"></div>
+            <div className="sk-cube sk-cube5"></div>
+            <div className="sk-cube sk-cube6"></div>
+            <div className="sk-cube sk-cube7"></div>
+            <div className="sk-cube sk-cube8"></div>
+            <div className="sk-cube sk-cube9"></div>
+        </div>
     );
 }
 
@@ -176,30 +176,32 @@ class HeroList extends React.Component {
                 onClick={this.handleShowMore}> Show more characters </button>
         }
         
+        
         // Loading screen
         if(!isLoaded) {
-            return <LoadingScreen/>
+            return (
+                <div className="characters-page">
+                    <LoadingScreen/>
+                </div>
+            );   
         } else {
             return (
-                <div className="App">
+                <div className="characters-page">
                         <div className="filter">
-                        {/* <label> Search name 
-                            <input type="text" value={this.state.name} onChange={this.handleNameChange}></input>
-                        </label> */}
-                        <label>  <h3>Filter search: </h3>  </label>
-                        <label> <p>Name Start with - </p></label>
-                        <select id="options" value={this.state.request.nameStart} 
-                            onChange={this.handleLetterChange}>
-                            {alphabet.map((x,y) => <option key={y}>{x}</option>)}
-                        </select>
-                        <label> <p>Order By  - </p></label>
-                        <select value={this.state.request.order} onChange={this.handleOrderChange }>
-                            <option> Ascending </option>
-                            <option> Descending </option>
-                        </select>
-                        <button className="go-button" onClick={this.handleSubmit}>Go</button>
-                        <input placeholder="Search by name" value={this.state.request.name} 
-                            onChange={this.handleNameChange} onKeyUp={this.handleSearch}></input>
+                            <label>  <h3>Filter search: </h3>  </label>
+                            <label> <p>Name Start with - </p></label>
+                            <select id="options" value={this.state.request.nameStart} 
+                                onChange={this.handleLetterChange}>
+                                {alphabet.map((x,y) => <option key={y}>{x}</option>)}
+                            </select>
+                            <label> <p>Order By  - </p></label>
+                            <select value={this.state.request.order} onChange={this.handleOrderChange }>
+                                <option> Ascending </option>
+                                <option> Descending </option>
+                            </select>
+                            <button className="go-button" onClick={this.handleSubmit}>Go</button>
+                            <input placeholder="Search by name" value={this.state.request.name} 
+                                onChange={this.handleNameChange} onKeyUp={this.handleSearch}></input>
                         </div>
                         <div className="hero-list">
                             {data.map((hero, index) =><HeroDetails heroDetails={hero} key={index}
